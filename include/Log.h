@@ -10,6 +10,46 @@ using std::cout;
 using std::endl;
 using std::string;
 
+#define LOG_INFO(logMsgFormat, ...)                       \
+    do {                                                  \
+        Log &log = Log::getInstance();                    \
+        log.setLogLevel(INFO);                            \
+        char buf[1024] = {0};                             \
+        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__); \
+        log.writeLog(buf);                                \
+    } while (0)
+
+#define LOG_ERROR(logMsgFormat, ...)                      \
+    do {                                                  \
+        Log &log = Log::getInstance();                    \
+        log.setLogLevel(ERROR);                           \
+        char buf[1024] = {0};                             \
+        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__); \
+        log.writeLog(buf);                                \
+    } while (0)
+
+#define LOG_FATAL(logMsgFormat, ...)                      \
+    do {                                                  \
+        Log &log = Log::getInstance();                    \
+        log.setLogLevel(FATAL);                           \
+        char buf[1024] = {0};                             \
+        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__); \
+        log.writeLog(buf);                                \
+    } while (0)
+
+#ifdef MUDUO_DEBUG
+#define LOG_DEBUG(logMsgFormat, ...)                      \
+    do {                                                  \
+        Log &log = Log::getInstance();                    \
+        log.setLogLevel(DEBUG);                           \
+        char buf[1024] = {0};                             \
+        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__); \
+        log.writeLog(buf);                                \
+    } while (0)
+#else
+#define LOG_DEBUG(logMsgFormat, ...)
+#endif
+
 /*日志等级*/
 enum LogLevel {
     INFO,  // 普通信息
