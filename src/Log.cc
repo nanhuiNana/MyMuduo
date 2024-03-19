@@ -28,3 +28,9 @@ void Log::writeLog(string msg) {
     }
     cout << Timestamp::now().toString() << " : " << msg << endl;
 }
+
+/*²âÊÔ³ÌÐò*/
+// int main() {
+//     LOG_INFO("%s", "hello");
+//     return 0;
+// }
